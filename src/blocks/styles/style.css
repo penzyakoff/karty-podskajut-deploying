@@ -13,11 +13,11 @@
 }
 
 .theme_dark .colored-text::after {
-  background-image: url(../src/blocks/images/pattern.svg)
+  background-image: url(../images/pattern.svg)
 }
 
 .theme_dark .header__theme-button_is-active::after {
-  background-image: url(../src/blocks/images/pattern.svg);
+  background-image: url(../images/pattern.svg);
 }
 
 .theme_dark .content__text-block_type_first-lettered
@@ -26,7 +26,7 @@
  }
 
  .theme_dark .content__list li::before {
-  background-image: url(../src/blocks/images/marker-dark.svg);
+  background-image: url(../images/marker-dark.svg);
  }
 
 *,
