@@ -3,6 +3,12 @@ const concat = require('gulp-concat-css');
 const plumber = require('gulp-plumber');
 const del = require('del');
 const browserSync = require('browser-sync').create();
+const postcss = require('gulp-postcss');
+const autoprefixer = require('autoprefixer');
+const mediaquery = require('postcss-combine-media-query');
+const cssnano = require('cssnano');
+const htmlMinify = require('html-minifier');
+
 
 function serve() {
   browserSync.init({
@@ -13,18 +19,43 @@ function serve() {
 }
 
 function html() {
+
+  const options = {
+    removeComments: true,
+    removeRedundantAttributes: true,
+    removeScriptTypeAttributes: true,
+    removeStyleLinkTypeAttributes: true,
+    sortClassName: true,
+    useShortDoctype: true,
+    collapseWhitespace: true,
+    minifyCSS: true,
+    keepClosingSlash: true
+  };
+
   return gulp.src('src/**/*.html')
         .pipe(plumber())
+        .on('data', function(file) {
+          const buferFile = Buffer.from(htmlMinify.minify(file.contents.toString(), options))
+          return file.contents = buferFile
+        })
         .pipe(gulp.dest('dist/'))
         .pipe(browserSync.reload({stream: true}));
 }
 
 function css() {
-  return gulp.src('src/blocks/styles/**/*.css') // updated to specify styles folder
+
+  const plugins = [
+    autoprefixer({ overrideBrowserslist: ['last 5 versions'], grid: true }),
+    mediaquery(),
+    cssnano()
+  ];
+
+  return gulp.src('src/blocks/styles/**/*.css') 
         .pipe(plumber())
         .pipe(concat('bundle.css'))
-        .pipe(gulp.dest('dist/styles')) // updated to place in styles subfolder
-        .pipe(browserSync.reload({stream: true}));
+        .pipe(postcss(plugins))
+        .pipe(gulp.dest('dist/styles'))
+        .pipe(browserSync.reload({stream: true}))
 }
 
 function images() {

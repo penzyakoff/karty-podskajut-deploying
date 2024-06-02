@@ -1,6 +1,6 @@
 :root {
   --main-font: raleway;
-  --accent-font: 'STIX Two Text';
+  --accent-font: "STIX Two Text";
   --bg-color: #f3efec;
   --text-color: #312a4e;
   --accent-color: #ffab6b;
@@ -105,7 +105,7 @@ button:disabled {
 }
 
 .header__theme-button_is-active::after {
-  content: '';
+  content: "";
   position: absolute;
   z-index: -1;
   inline-size: calc(100% + 8px);
@@ -173,7 +173,7 @@ button:disabled {
 }
 
 .content__list li::before {
-  content: '';
+  content: "";
   position: absolute;
   inline-size: 15px;
   block-size: 15px;
@@ -232,7 +232,7 @@ button:disabled {
 }
 
 .colored-text::after {
-  content: '';
+  content: "";
   position: absolute;
   z-index: -1;
   inline-size: calc(100% + 8px);
